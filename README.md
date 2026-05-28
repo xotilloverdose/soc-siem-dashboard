@@ -37,6 +37,4 @@ Username: admin
 
 Password: admin123
 
-## Screenshots
 
-Add dashboard screenshots inside screenshots folder.
