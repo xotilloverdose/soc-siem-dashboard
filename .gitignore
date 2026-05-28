@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+siem.db
+sample_logs.txt
+quarantine_db.txt
+reports/

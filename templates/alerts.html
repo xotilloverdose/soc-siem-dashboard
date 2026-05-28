@@ -1,0 +1,43 @@
+<h1>Alert History</h1>
+
+<a href="/">Dashboard</a>
+
+<table border="1">
+
+<tr>
+
+<th>ID</th>
+
+<th>Time</th>
+
+<th>IP</th>
+
+<th>Severity</th>
+
+<th>Rule</th>
+
+<th>Status</th>
+
+</tr>
+
+{% for a in alerts %}
+
+<tr>
+
+<td>{{ a[0] }}</td>
+
+<td>{{ a[1] }}</td>
+
+<td>{{ a[2] }}</td>
+
+<td>{{ a[3] }}</td>
+
+<td>{{ a[4] }}</td>
+
+<td>{{ a[5] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>

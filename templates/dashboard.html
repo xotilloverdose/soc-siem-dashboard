@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>SOC Dashboard</title>
+
+<meta http-equiv="refresh" content="5">
+
+<style>
+
+body{
+
+background:#0d1117;
+
+color:white;
+
+font-family:Arial;
+
+padding:20px;
+
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+th,td{
+
+padding:12px;
+
+border:1px solid #333;
+
+text-align:center;
+
+}
+
+th{
+
+background:#161b22;
+
+}
+
+.critical{
+
+background:#7f1d1d;
+
+}
+
+.high{
+
+background:#92400e;
+
+}
+
+.medium{
+
+background:#665200;
+
+}
+
+.low{
+
+background:#14532d;
+
+}
+
+.feed{
+
+height:220px;
+
+overflow:auto;
+
+border:1px solid gray;
+
+padding:10px;
+
+background:#111;
+
+}
+
+a{
+
+color:cyan;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🔥 SOC SIEM DASHBOARD</h1>
+
+<a href="/map">Attack Map</a>
+
+|
+
+<a href="/logout">Logout</a>
+
+<br><br>
+
+<table>
+
+<tr>
+
+<th>IP</th>
+
+<th>Attempts</th>
+
+<th>Country</th>
+
+<th>Severity</th>
+
+<th>Rule</th>
+
+<th>Auto Detected</th>
+
+<th>Manually Blocked</th>
+
+<th>Action</th>
+
+</tr>
+
+{% for item in data %}
+
+<tr class="{{ item.severity.lower() }}">
+
+<td>{{ item.ip }}</td>
+
+<td>{{ item.count }}</td>
+
+<td>{{ item.country }}</td>
+
+<td>{{ item.severity }}</td>
+
+<td>{{ item.rule }}</td>
+
+<td>
+
+{% if item.auto_detected %}
+
+⚠️ YES
+
+{% else %}
+
+NO
+
+{% endif %}
+
+</td>
+
+<td>
+
+{% if item.manual_blocked %}
+
+🛑 BLOCKED
+
+{% else %}
+
+SAFE
+
+{% endif %}
+
+</td>
+
+<td>
+
+{% if item.manual_blocked %}
+
+<a href="/unquarantine/{{ item.ip }}">
+
+UNBAN
+
+</a>
+
+{% else %}
+
+<a href="/quarantine/{{ item.ip }}">
+
+QUARANTINE
+
+</a>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<h2>Timeline</h2>
+
+<div class="feed">
+
+{% for event in timeline %}
+
+<div>
+
+[{{ event.time }}]
+
+{{ event.event }}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+
+</html>
